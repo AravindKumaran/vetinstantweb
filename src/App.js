@@ -1,17 +1,33 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+import PrivateRoute from 'routing/PrivateRoute'
 
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
+import LoginPage from 'pages/auth/LoginPage'
+import RegisterPage from 'pages/auth/RegisterPage'
+import HomePage from 'pages/doctor/HomePage'
+import NotFound from 'pages/NotFound'
+import { useAuth } from 'context/use-auth'
 
 const App = () => {
+  const { loadUser } = useAuth()
+
+  useEffect(() => {
+    if (localStorage.token) {
+      loadUser()
+    }
+  }, [])
+
   return (
-    <Router>
+    <>
+      <Toaster />
       <Switch>
+        <PrivateRoute exact path='/' component={HomePage} />
         <Route path='/register' component={RegisterPage} />
-        <Route path='/' component={LoginPage} />
+        <Route path='/login' component={LoginPage} />
+        <Route path='/*' component={NotFound} />
       </Switch>
-    </Router>
+    </>
   )
 }
 

@@ -1,0 +1,35 @@
+.header {
+  background-color: #fff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  height: 70px;
+  padding: 1.5rem;
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+}
+
+.nav__list li {
+  margin: 1rem;
+}
+
+.nav__list a {
+  color: #696d71;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
+
+.nav__list a:hover,
+.nav__list a:active,
+.nav__list a.active {
+  background: #f1f3f4;
+  border-color: #292929;
+  color: #292929;
+}
+
+.nav__list a:active,
+.nav__list a.active {
+  font-weight: bold;
+}
