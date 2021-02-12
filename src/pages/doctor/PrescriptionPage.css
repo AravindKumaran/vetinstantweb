@@ -1,0 +1,13 @@
+.prescription {
+  background-color: #fff;
+  width: 600px;
+  padding: 15px 20px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .prescription {
+    margin-top: 30px;
+    width: 100%;
+  }
+}

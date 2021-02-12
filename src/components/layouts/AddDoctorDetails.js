@@ -110,8 +110,6 @@ const AddDoctorDetails = () => {
   const [loading, setLoading] = useState(false)
   const [hospitals, setHopitals] = useState([])
 
-  const [docFile, setDocFile] = useState(null)
-
   useEffect(() => {
     const getAllHospitals = async () => {
       setLoading(true)
@@ -140,11 +138,6 @@ const AddDoctorDetails = () => {
     getAllHospitals()
   }, [])
 
-  const handleInput = (e) => {
-    console.log('Files', e.target.files)
-    setDocFile(e.target.files[0])
-  }
-
   const onSubmit = async (values) => {
     const data = new FormData()
     if (!values.selectHospName) {
@@ -171,18 +164,8 @@ const AddDoctorDetails = () => {
       data.append('hospital', values.selectHospName)
     }
 
-    data.append('file', docFile)
-    // data.append('file', {
-    //   name: 'file',
-    //   type: 'application/pdf',
-    //   uri: values.file[0].name,
-    // })
-    // data.append('profile', {
-    //   name: 'profile',
-    //   type: 'application/pdf',
-    //   uri: values.profile[0].name,
-    // })
-    // data.append('profile', values.profile[0])
+    data.append('file', values.file[0])
+    data.append('profile', values.profile[0])
     data.append('phone', values.phone)
     data.append('accno', values.acc)
     data.append('accname', values.accname)
@@ -192,30 +175,23 @@ const AddDoctorDetails = () => {
     data.append('qlf', values.qlf)
     data.append('regNo', values.regNo)
 
-    for (var key of data.entries()) {
-      console.log(key[0] + ', ' + key[1])
-    }
+    // for (var key of data.entries()) {
+    //   console.log(key[0] + ', ' + key[1])
+    // }
 
     try {
       setLoading(true)
-      const res = await client.post(
-        '/doctors',
-        {
-          data,
+      const res = await client.post('/doctors', data, {
+        headers: {
+          'Content-Type':
+            'multipart/form-data; boundary=<calculated when request is sent>',
+          Authorization: `Bearer ${localStorage.token}`,
         },
-        {
-          headers: {
-            // 'Content-Type': 'multipart/form-data',
-            'Content-Type':
-              'multipart/form-data; boundary=<calculated when request is sent>',
-            Authorization: `Bearer ${localStorage.token}`,
-          },
-        }
-      )
+      })
       console.log('Res', res)
       setLoading(false)
       toast.success('Your data has been saved')
-      // window.location.href = '/'
+      window.location.href = '/'
     } catch (error) {
       setLoading(false)
       toast.error(error.response.data.msg || 'Error in file submit')
@@ -283,7 +259,7 @@ const AddDoctorDetails = () => {
             label='Consultation Fee'
             name='fee'
             type='numeric'
-            placeholder='consultation fee in ruppes (₹)'
+            placeholder='₹ 500'
             myRef={register}
             error={errors.fee}
           />
@@ -330,9 +306,9 @@ const AddDoctorDetails = () => {
             error={errors.profile}
           />
 
-          <input type='file' name='file' onChange={handleInput} />
-
-          <Button type='submit'>Submit</Button>
+          <Button classNames='full' type='submit'>
+            Submit
+          </Button>
         </form>
       </div>
     </div>
