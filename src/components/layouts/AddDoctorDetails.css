@@ -5,9 +5,9 @@
   width: 600px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
   .add__details {
     width: 100%;
-    margin: 15px 20px;
+    margin: 15px 0;
   }
 }

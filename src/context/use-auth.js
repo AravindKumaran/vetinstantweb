@@ -76,6 +76,15 @@ export function AuthProvider({ children }) {
           },
         }
       )
+
+      if (res.data.user.role !== 'doctor') {
+        dispatch({
+          type: 'AUTH_ERROR',
+          payload: 'Something Went Wrong! Try Again Later',
+        })
+        return
+      }
+
       dispatch({
         type: 'USER_LOADED',
         payload: res.data.user,

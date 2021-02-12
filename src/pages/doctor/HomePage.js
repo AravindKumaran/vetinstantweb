@@ -47,7 +47,9 @@ const HomePage = () => {
   return (
     <Layout>
       {loading && <LoadingSpinner asOverlay />}
-      {user && <h2 className='doc__title'>Welcome Doctor: {user.name}</h2>}
+      {user && (
+        <h2 className='doc__title text-center'>Welcome Doctor: {user.name}</h2>
+      )}
       {doctorDetails ? (
         <div className='doctor'>
           <h4>Here are your Details: </h4>

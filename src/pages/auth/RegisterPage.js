@@ -1,18 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import { FcGoogle } from 'react-icons/fc'
 import { Link, useHistory } from 'react-router-dom'
 
 import Button from 'components/shared/Forms/Button'
 import Input from 'components/shared/Forms/Input'
 import PasswordInput from 'components/shared/Forms/PasswordInput'
+import LoadingSpinner from 'components/shared/UI/LoadingSpinner'
 
 import { useAuth } from 'context/use-auth'
+import { GoogleLogin } from 'react-google-login'
+import client from 'services/client'
 
 const LoginPage = () => {
   const { handleSubmit, register, errors } = useForm()
-  const { registerUser, error, clearErrors, isAuthenticated } = useAuth()
+  const {
+    registerUser,
+    error,
+    clearErrors,
+    isAuthenticated,
+    loadUser,
+  } = useAuth()
   const history = useHistory()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -38,8 +49,30 @@ const LoginPage = () => {
     clearErrors()
   }
 
+  const handleGoogleAuth = async (res) => {
+    console.log('Ress', res.profileObj)
+    try {
+      setLoading(true)
+      const password = res.profileObj.googleId + Date.now()
+      const googleRes = await client.post('/auth/saveGoogle', {
+        name: res.profileObj.name,
+        emailID: res.profileObj.email,
+        password: password,
+        role: 'doctor',
+      })
+      localStorage.setItem('token', googleRes.data.token)
+      loadUser()
+      setLoading(false)
+    } catch (error) {
+      console.log('Error', error)
+      toast.error('Something Went Wrong! Please try after some time')
+      setLoading(false)
+    }
+  }
+
   return (
     <div className='center'>
+      {loading && <LoadingSpinner asOverlay />}
       <div className='form__wrapper'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-center'>New User!</h2>
@@ -83,16 +116,33 @@ const LoginPage = () => {
           />
 
           <Button classNames='full' type='submit'>
-            Submit
+            Register
           </Button>
         </form>
-        <div className='flex-sbt py-10'>
-          <span>Already have an account?</span>
+        <hr />
 
-          <Link to='/login' className='btn'>
-            Login
-          </Link>
-        </div>
+        <GoogleLogin
+          clientId='320113619885-gk7d3v66vs3bf4nksn6mf3tj2s6prgcs.apps.googleusercontent.com'
+          buttonText='Login With Google'
+          onSuccess={handleGoogleAuth}
+          // onFailure={handleGoogleAuth}
+          cookiePolicy={'single_host_origin'}
+          render={(renderProps) => (
+            <button onClick={renderProps.onClick} className='google_btn'>
+              <div className='flex-center'>
+                <FcGoogle style={{ fontSize: '2.5rem' }} />
+                <span className='google__text'>Register With Google</span>
+              </div>
+            </button>
+          )}
+        />
+      </div>
+      <div className='flex-sbt py-10'>
+        <span>Already have an account?</span>
+
+        <Link to='/login' className='btn'>
+          Login
+        </Link>
       </div>
     </div>
   )

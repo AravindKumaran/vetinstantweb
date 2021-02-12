@@ -15,10 +15,12 @@ const Header = () => {
       <nav className='nav'>
         <ul className='nav__list'>
           <li>
-            <NavLink to='/'>Home</NavLink>
+            <NavLink exact to='/'>
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to='/login'>Patient List</NavLink>
+            <NavLink to='/patientList'>Patient List</NavLink>
           </li>
           <li>
             <NavLink to='/register'>History</NavLink>

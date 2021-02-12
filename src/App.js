@@ -8,6 +8,7 @@ import RegisterPage from 'pages/auth/RegisterPage'
 import HomePage from 'pages/doctor/HomePage'
 import NotFound from 'pages/NotFound'
 import { useAuth } from 'context/use-auth'
+import PatientListPage from 'pages/doctor/PatientListPage'
 
 const App = () => {
   const { loadUser } = useAuth()
@@ -23,6 +24,7 @@ const App = () => {
       <Toaster />
       <Switch>
         <PrivateRoute exact path='/' component={HomePage} />
+        <PrivateRoute exact path='/patientList' component={PatientListPage} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/login' component={LoginPage} />
         <Route path='/*' component={NotFound} />

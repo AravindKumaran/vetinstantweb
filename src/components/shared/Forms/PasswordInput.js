@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { FiEye, FiEyeOff } from 'react-icons/fi'
 import './Input.css'
 
 const PasswordInput = ({
@@ -40,7 +41,7 @@ const PasswordInput = ({
           }}
           onClick={() => setShowPassword(!showPassword)}
         >
-          SHOW
+          {showPassword ? <FiEyeOff /> : <FiEye />}
         </span>
       </div>
 

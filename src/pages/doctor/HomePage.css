@@ -13,6 +13,7 @@
   display: flex;
   align-items: center;
   margin: 10px 5px;
+  flex-wrap: wrap;
 }
 
 .doctor__card h5 {
@@ -22,7 +23,17 @@
 }
 
 .doctor__card p {
-  /* color: #b36a43; */
   color: #202124;
   font-size: 2.2rem;
+}
+
+@media screen and (max-width: 500px) {
+  .doctor__card h5 {
+    font-size: 1.4rem;
+    margin-right: 5px;
+  }
+
+  .doctor__card p {
+    font-size: 1.8rem;
+  }
 }

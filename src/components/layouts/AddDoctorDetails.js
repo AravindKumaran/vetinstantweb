@@ -223,116 +223,118 @@ const AddDoctorDetails = () => {
   }
 
   return (
-    <div className='add__details'>
-      {loading && <LoadingSpinner asOverlay />}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          element='textarea'
-          label='Hospital/Clinic Name'
-          placeholder='Hospital/Clinic Name'
-          name='hospname'
-          myRef={register}
-          error={errors.hospname}
-        />
+    <div className='center'>
+      <div className='add__details'>
+        {loading && <LoadingSpinner asOverlay />}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            element='textarea'
+            label='Hospital/Clinic Name'
+            placeholder='Hospital/Clinic Name'
+            name='hospname'
+            myRef={register}
+            error={errors.hospname}
+          />
 
-        <Select
-          data={hospitals}
-          label='Select Hospital Name If Exists!'
-          name='selectHospName'
-          myRef={register}
-          error={errors.selectHospName}
-        />
+          <Select
+            data={hospitals}
+            label='Select Hospital Name If Exists!'
+            name='selectHospName'
+            myRef={register}
+            error={errors.selectHospName}
+          />
 
-        <Input
-          label='Registration Number'
-          name='regNo'
-          type='numeric'
-          placeholder='Enter your registration number'
-          maxLength={10}
-          myRef={register}
-          error={errors.regNo}
-        />
+          <Input
+            label='Registration Number'
+            name='regNo'
+            type='numeric'
+            placeholder='Enter your registration number'
+            maxLength={10}
+            myRef={register}
+            error={errors.regNo}
+          />
 
-        <Select
-          data={qualifs}
-          label='Select Your Qualifications'
-          name='qlf'
-          myRef={register}
-          error={errors.qlf}
-        />
+          <Select
+            data={qualifs}
+            label='Select Your Qualifications'
+            name='qlf'
+            myRef={register}
+            error={errors.qlf}
+          />
 
-        <Input
-          label='Document Form File'
-          type='file'
-          name='file'
-          myRef={register}
-          error={errors.file}
-        />
+          <Input
+            label='Document Form File'
+            type='file'
+            name='file'
+            myRef={register}
+            error={errors.file}
+          />
 
-        <Input
-          label='Phone Number'
-          name='phone'
-          type='numeric'
-          placeholder='Enter your phone number'
-          maxLength={10}
-          myRef={register}
-          error={errors.phone}
-        />
-        <Input
-          label='Consultation Fee'
-          name='fee'
-          type='numeric'
-          placeholder='consultation fee in ruppes (₹)'
-          myRef={register}
-          error={errors.fee}
-        />
+          <Input
+            label='Phone Number'
+            name='phone'
+            type='numeric'
+            placeholder='Enter your phone number'
+            maxLength={10}
+            myRef={register}
+            error={errors.phone}
+          />
+          <Input
+            label='Consultation Fee'
+            name='fee'
+            type='numeric'
+            placeholder='consultation fee in ruppes (₹)'
+            myRef={register}
+            error={errors.fee}
+          />
 
-        <Input
-          label='Account Number'
-          type='numeric'
-          name='acc'
-          maxLength={18}
-          placeholder='xxxx xxxx xxxx xxxx'
-          myRef={register}
-          error={errors.acc}
-        />
+          <Input
+            label='Account Number'
+            type='numeric'
+            name='acc'
+            maxLength={18}
+            placeholder='xxxx xxxx xxxx xxxx'
+            myRef={register}
+            error={errors.acc}
+          />
 
-        <Input
-          label='Name Of Merchant'
-          name='accname'
-          placeholder='Name Of Merchant'
-          myRef={register}
-          error={errors.accname}
-        />
+          <Input
+            label='Name Of Merchant'
+            name='accname'
+            placeholder='Name Of Merchant'
+            myRef={register}
+            error={errors.accname}
+          />
 
-        <Select
-          data={accType}
-          label='Account Type'
-          name='type'
-          myRef={register}
-          error={errors.type}
-        />
+          <Select
+            data={accType}
+            label='Account Type'
+            name='type'
+            myRef={register}
+            error={errors.type}
+          />
 
-        <Input
-          label='IFSC Code'
-          name='ifsc'
-          placeholder='Enter your bank ifsc code'
-          maxLength={11}
-          myRef={register}
-          error={errors.ifsc}
-        />
-        <Input
-          label='Profile Document'
-          type='file'
-          name='profile'
-          myRef={register}
-          error={errors.profile}
-        />
+          <Input
+            label='IFSC Code'
+            name='ifsc'
+            placeholder='Enter your bank ifsc code'
+            maxLength={11}
+            myRef={register}
+            error={errors.ifsc}
+          />
+          <Input
+            label='Profile Document'
+            type='file'
+            name='profile'
+            myRef={register}
+            error={errors.profile}
+          />
 
-        <input type='file' name='file' onChange={handleInput} />
+          <input type='file' name='file' onChange={handleInput} />
 
-        <Button type='submit'>Submit</Button>
-      </form>
+          <Button type='submit'>Submit</Button>
+        </form>
+      </div>
     </div>
   )
 }
