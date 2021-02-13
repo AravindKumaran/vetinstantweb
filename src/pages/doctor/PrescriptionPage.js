@@ -128,7 +128,7 @@ const PrescriptionPage = () => {
             />
             <Input
               type='file'
-              label='Select image(optional)'
+              label='Select image'
               name='photo'
               myRef={register}
               error={errors.photo}

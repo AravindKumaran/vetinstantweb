@@ -1,0 +1,58 @@
+.room {
+  position: relative;
+}
+.room button {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+.room > h3 {
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 1em;
+}
+
+.local-participant {
+  text-align: center;
+  margin-bottom: 2em;
+}
+.remote-participants {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 2em 2em;
+}
+.participant {
+  background: #333e5a;
+  padding: 10px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.participant:last-child {
+  margin-right: 0;
+}
+.participant h3 {
+  text-align: center;
+  padding-bottom: 0.5em;
+  color: #fff;
+}
+
+video {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+.call-icons {
+  font-size: 30px;
+  color: #000;
+  background: #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 10px 20px;
+  margin-top: 20px;
+}

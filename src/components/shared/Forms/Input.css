@@ -1,13 +1,8 @@
-/* .form-group {
-  padding: 10px;
-} */
-
 .form-group label {
   display: block;
   font-weight: 600;
   margin-top: 1.3rem;
   margin-bottom: 1rem;
-  /* color: #19191d; */
   color: #0c2146;
 }
 
@@ -15,7 +10,7 @@
   display: block;
   border: none;
   outline: none;
-  border-radius: 2px;
+  border-radius: 5px;
   padding: 8px 10px;
   margin-top: 0.125rem;
   margin-bottom: 0.125rem;
@@ -23,7 +18,7 @@
   font-size: 1.6rem;
   font-weight: 400;
   letter-spacing: 0.027em;
-  box-shadow: 0 0 0 1px #9dc2ff;
+  box-shadow: 0 0 0 1.2px #9dc2ff;
   color: #0c2146;
 }
 

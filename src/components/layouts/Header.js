@@ -25,10 +25,6 @@ const Header = () => {
           <li>
             <NavLink to='/prescription'>Prescription</NavLink>
           </li>
-          <li>
-            <NavLink to='/abc'>Add Details</NavLink>
-          </li>
-
           {isAuthenticated && (
             <li>
               <Button onClick={() => logoutUser()}>Logout</Button>

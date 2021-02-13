@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Layout from 'components/layouts/Layout'
 import client from 'services/client'
 import toast from 'react-hot-toast'
+import { FiMessageCircle, FiVideo } from 'react-icons/fi'
 
 import './PatientListPage.css'
 
@@ -10,6 +11,7 @@ import LoadingSpinner from 'components/shared/UI/LoadingSpinner'
 import { FiChevronRight } from 'react-icons/fi'
 import Backdrop from 'components/shared/UI/Backdrop'
 import Modal from 'components/shared/UI/Modal'
+import { Link } from 'react-router-dom'
 
 const PatientListPage = () => {
   const { user } = useAuth()
@@ -72,6 +74,22 @@ const PatientListPage = () => {
           toggle={toggleModal}
           title={`${currentPatient.senderName} pet details`}
         >
+          <div className='chat-video_wrapper flex-center'>
+            <Link
+              to={`/video-call/${currentPatient.name}`}
+              className='btn flex-center'
+            >
+              <FiVideo className='icon' />
+              Video Call
+            </Link>
+            <Link
+              to={`/chat/${currentPatient.name}`}
+              className='btn flex-center'
+            >
+              <FiMessageCircle className='icon' />
+              Chat
+            </Link>
+          </div>
           {petLoading && <LoadingSpinner asOverlay />}
           {pet && (
             <div className='pet__details'>

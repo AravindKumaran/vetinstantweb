@@ -65,3 +65,8 @@
   border-radius: 50%;
   padding: 8px;
 }
+
+.chat-video_wrapper .icon {
+  font-size: 25px;
+  margin-right: 18px;
+}
