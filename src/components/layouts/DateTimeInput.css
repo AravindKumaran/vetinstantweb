@@ -1,0 +1,14 @@
+.custom__datetime {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 2px solid #ada9a9;
+  padding: 10px 20px;
+  /* margin: 10px 5px; */
+  border-radius: 10px;
+}
+
+.custom__datetime p {
+  font-size: 2.2rem;
+}

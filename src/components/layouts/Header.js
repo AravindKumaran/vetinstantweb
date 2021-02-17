@@ -25,6 +25,9 @@ const Header = () => {
           <li>
             <NavLink to='/prescription'>Prescription</NavLink>
           </li>
+          <li>
+            <NavLink to='/call-log'>CallLogs</NavLink>
+          </li>
           {isAuthenticated && (
             <li>
               <Button onClick={() => logoutUser()}>Logout</Button>

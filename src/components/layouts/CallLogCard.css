@@ -1,0 +1,26 @@
+.calllog__card {
+  background-color: #fef3c7;
+  padding: 10px 18px;
+  border-radius: 5px;
+  margin: 10px 5px;
+}
+.calllog__card__top h2 {
+  color: #535863;
+  text-transform: capitalize;
+  margin: 5px 2px;
+}
+
+.calllog__date {
+  display: flex;
+  align-items: center;
+}
+
+.calllog__time {
+  display: flex;
+  align-items: center;
+}
+.calllog__btn {
+  margin: 0;
+  border-radius: 50px;
+  background-color: #60a5fa;
+}

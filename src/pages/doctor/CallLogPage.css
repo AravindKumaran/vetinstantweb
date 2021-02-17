@@ -1,0 +1,68 @@
+.call-log__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.missed__call {
+  flex-grow: 1;
+}
+
+.completed__call {
+  flex-grow: 1;
+}
+
+.call__common {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 12px 25px;
+  margin: 10px 20px;
+  height: 450px;
+  overflow-y: auto;
+}
+.call__common h2 {
+  margin-bottom: 40px;
+}
+
+.sch__modal {
+  padding: 5px 30px;
+}
+
+.sch__modal h4 {
+  margin: 15px 0;
+}
+.btn__sch {
+  margin: 20px 0 10px 40px;
+}
+
+@media screen and (max-width: 900px) {
+  .call-log__container {
+    flex-direction: column;
+    width: 100%;
+  }
+  .missed__call {
+    width: 90%;
+  }
+
+  .completed__call {
+    width: 90%;
+  }
+}
+
+.react-datepicker {
+  font-size: 1.5rem;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  font-size: 2rem;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  width: 3rem;
+  line-height: 2rem;
+  margin: 0.5rem;
+}

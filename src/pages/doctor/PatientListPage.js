@@ -122,6 +122,7 @@ const PatientListPage = () => {
                           src={`http://192.168.43.242:8000/${img}`}
                           width='160'
                           height='160'
+                          alt={`${pet.type}`}
                         />
                       </div>
                     ))}

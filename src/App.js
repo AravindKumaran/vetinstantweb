@@ -11,6 +11,8 @@ import PatientListPage from 'pages/doctor/PatientListPage'
 import NotFound from 'pages/NotFound'
 import PrescriptionPage from 'pages/doctor/PrescriptionPage'
 import VideoCallPage from 'pages/doctor/VideoCallPage'
+import ChatPage from 'pages/doctor/ChatPage'
+import CallLogPage from 'pages/doctor/CallLogPage'
 
 const App = () => {
   const { loadUser } = useAuth()
@@ -29,6 +31,8 @@ const App = () => {
         <PrivateRoute exact path='/patientList' component={PatientListPage} />
         <PrivateRoute exact path='/prescription' component={PrescriptionPage} />
         <PrivateRoute exact path='/video-call/:id' component={VideoCallPage} />
+        <PrivateRoute exact path='/chat/:id' component={ChatPage} />
+        <PrivateRoute exact path='/call-log' component={CallLogPage} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/login' component={LoginPage} />
         <Route path='/*' component={NotFound} />
