@@ -106,6 +106,16 @@ hr {
   border-radius: 10px;
 }
 
+.forgot__wrapper {
+  position: relative;
+}
+
+.forgot {
+  position: absolute;
+  right: 10px;
+  top: -2px;
+}
+
 .form__wrapper {
   background: #fff;
   width: 500px;

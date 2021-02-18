@@ -7,6 +7,7 @@ export const useAuth = () => useContext(AuthContext)
 
 const initialState = {
   token: localStorage.getItem('token') || null,
+  loading: false,
   user: null,
   isAuthenticated: null,
   error: null,
@@ -20,11 +21,13 @@ function reducer(state, action) {
       return {
         ...state,
         ...action.payload,
+        loading: false,
         isAuthenticated: true,
       }
     case 'USER_LOADED':
       return {
         ...state,
+        loading: false,
         isAuthenticated: true,
         user: action.payload,
       }
@@ -36,6 +39,7 @@ function reducer(state, action) {
       return {
         ...state,
         token: null,
+        loading: false,
         isAuthenticated: false,
         user: null,
         error: action.payload,
@@ -46,14 +50,22 @@ function reducer(state, action) {
       return {
         ...state,
         token: null,
+        loading: false,
         isAuthenticated: false,
         user: null,
         error: null,
       }
 
+    case 'LOADING':
+      return {
+        ...state,
+        loading: true,
+      }
+
     case 'CLEAR_ERRORS':
       return {
         ...state,
+        loading: false,
         error: null,
       }
 
@@ -67,6 +79,9 @@ export function AuthProvider({ children }) {
 
   const loadUser = async () => {
     try {
+      dispatch({
+        type: 'LOADING',
+      })
       const res = await client.patch(
         '/users/me',
         {},
@@ -100,6 +115,9 @@ export function AuthProvider({ children }) {
 
   const loginUser = async (data) => {
     try {
+      dispatch({
+        type: 'LOADING',
+      })
       const res = await client.post('/auth/login', data)
       dispatch({
         type: 'LOGIN_SUCCESS',
@@ -116,6 +134,9 @@ export function AuthProvider({ children }) {
 
   const registerUser = async (data) => {
     try {
+      dispatch({
+        type: 'LOADING',
+      })
       const res = await client.post('/auth/signup', data)
       dispatch({
         type: 'REGISTER_SUCCESS',
@@ -141,6 +162,7 @@ export function AuthProvider({ children }) {
         isAuthenticated: state.isAuthenticated,
         user: state.user,
         error: state.error,
+        loading: state.loading,
         loginUser,
         registerUser,
         logoutUser,

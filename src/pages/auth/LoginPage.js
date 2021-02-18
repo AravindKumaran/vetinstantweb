@@ -15,7 +15,14 @@ import client from 'services/client'
 
 const LoginPage = () => {
   const { handleSubmit, register, errors } = useForm()
-  const { loginUser, error, clearErrors, isAuthenticated, loadUser } = useAuth()
+  const {
+    loginUser,
+    error,
+    clearErrors,
+    isAuthenticated,
+    loadUser,
+    loading: cLoading,
+  } = useAuth()
   const history = useHistory()
   const [loading, setLoading] = useState(false)
 
@@ -65,7 +72,7 @@ const LoginPage = () => {
 
   return (
     <div className='center'>
-      {loading && <LoadingSpinner asOverlay />}
+      {(loading || cLoading) && <LoadingSpinner asOverlay />}
       <div className='form__wrapper'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-center'>Welcome</h2>
@@ -84,19 +91,26 @@ const LoginPage = () => {
             })}
             error={errors.email}
           />
-          <PasswordInput
-            label='Password'
-            name='password'
-            placeholder='********'
-            myRef={register({
-              required: 'Please enter your password',
-              minLength: {
-                value: 8,
-                message: 'Password must be atleast 8 characters long',
-              },
-            })}
-            error={errors.password}
-          />
+
+          <div className='forgot__wrapper'>
+            <PasswordInput
+              label='Password'
+              name='password'
+              placeholder='********'
+              myRef={register({
+                required: 'Please enter your password',
+                minLength: {
+                  value: 8,
+                  message: 'Password must be atleast 8 characters long',
+                },
+              })}
+              error={errors.password}
+            />
+
+            <Link className='forgot' to='/forgotPassword'>
+              Forgot Password?
+            </Link>
+          </div>
 
           <Button classNames='full' type='submit'>
             Login

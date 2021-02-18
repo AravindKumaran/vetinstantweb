@@ -21,9 +21,12 @@ const LoginPage = () => {
     clearErrors,
     isAuthenticated,
     loadUser,
+    loading: cLoading,
   } = useAuth()
   const history = useHistory()
   const [loading, setLoading] = useState(false)
+
+  console.log('C', cLoading)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -72,7 +75,7 @@ const LoginPage = () => {
 
   return (
     <div className='center'>
-      {loading && <LoadingSpinner asOverlay />}
+      {(loading || cLoading) && <LoadingSpinner asOverlay />}
       <div className='form__wrapper'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-center'>New User!</h2>

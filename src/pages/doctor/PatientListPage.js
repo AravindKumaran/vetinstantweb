@@ -83,7 +83,10 @@ const PatientListPage = () => {
               Video Call
             </Link>
             <Link
-              to={`/chat/${currentPatient.name}`}
+              to={{
+                pathname: `/chat/${currentPatient.name}`,
+                state: { data: currentPatient },
+              }}
               className='btn flex-center'
             >
               <FiMessageCircle className='icon' />

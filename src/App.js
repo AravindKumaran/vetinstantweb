@@ -13,6 +13,8 @@ import PrescriptionPage from 'pages/doctor/PrescriptionPage'
 import VideoCallPage from 'pages/doctor/VideoCallPage'
 import ChatPage from 'pages/doctor/ChatPage'
 import CallLogPage from 'pages/doctor/CallLogPage'
+import ForgotPasswordPage from 'pages/auth/ForgotPasswordPage'
+import ResetPasswordPage from 'pages/auth/ResetPasswordPage'
 
 const App = () => {
   const { loadUser } = useAuth()
@@ -35,6 +37,8 @@ const App = () => {
         <PrivateRoute exact path='/call-log' component={CallLogPage} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/login' component={LoginPage} />
+        <Route path='/forgotPassword' component={ForgotPasswordPage} />
+        <Route path='/passwordreset/:token' component={ResetPasswordPage} />
         <Route path='/*' component={NotFound} />
       </Switch>
     </>
