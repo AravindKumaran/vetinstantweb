@@ -23,6 +23,11 @@ const qualifs = [
   { label: 'PhD', value: 'PhD' },
 ]
 
+const firstAv = [
+  { label: 'Yes', value: true },
+  { label: 'No', value: false },
+]
+
 const phoneRegExp = /^[6-9]\d{9}$/
 const ifscRegExp = /^[A-Z]{4}0[A-Z0-9]{6}$/
 const accRegExp = /^[0-9]{9,18}$/
@@ -100,6 +105,7 @@ const validationSchema = Yup.object().shape({
     .label('IFSC Code'),
   fee: Yup.string().required().label('Consultation Fee'),
   regNo: Yup.string().required().label('Registration Number'),
+  firstAvailaibeVet: Yup.string().required().label('First Available Vet'),
 })
 
 const AddDoctorDetails = () => {
@@ -173,6 +179,7 @@ const AddDoctorDetails = () => {
     data.append('ifsc', values.ifsc)
     data.append('fee', values.fee)
     data.append('qlf', values.qlf)
+    data.append('firstAvailaibeVet', values.firstAvailaibeVet)
     data.append('regNo', values.regNo)
 
     // for (var key of data.entries()) {
@@ -231,6 +238,14 @@ const AddDoctorDetails = () => {
           />
 
           <Select
+            data={firstAv}
+            label='Want to be first available vet?'
+            name='firstAvailaibeVet'
+            myRef={register}
+            error={errors.firstAvailaibeVet}
+          />
+
+          <Select
             data={qualifs}
             label='Select Your Qualifications'
             name='qlf'
@@ -275,9 +290,9 @@ const AddDoctorDetails = () => {
           />
 
           <Input
-            label='Name Of Merchant'
+            label='Name On Card'
             name='accname'
-            placeholder='Name Of Merchant'
+            placeholder='Name On Card'
             myRef={register}
             error={errors.accname}
           />

@@ -31,11 +31,10 @@ const HomePage = () => {
         setDoctorDetails(res.data.doctor)
         setLoading(false)
       } catch (err) {
-        toast.error(
-          err.response.data.msg
-            ? 'Please add your details below'
-            : 'Something Went Wrong! Try Again Later'
-        )
+        if (err.response.data.msg) {
+          toast.error('Please add your details below')
+        }
+
         setLoading(false)
       }
     }
