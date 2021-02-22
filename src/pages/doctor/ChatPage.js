@@ -47,7 +47,7 @@ const ChatPage = () => {
       } catch (error) {
         setLoading(false)
         toast.error(
-          error.response?.data.msg || 'Something went wrong! Please try again!'
+          error.response?.data?.msg || 'Something went wrong! Please try again!'
         )
       }
     }
