@@ -57,6 +57,7 @@ const PatientListPage = () => {
           Authorization: `Bearer ${localStorage.token}`,
         },
       })
+      console.log('PET', petRes)
       setPet(petRes.data.exPet)
       setPetLoading(false)
     } catch (error) {
@@ -106,11 +107,14 @@ const PatientListPage = () => {
               <h5>
                 Pet Type: <span>{pet.type}</span>
               </h5>
+              <h5>
+                Pet Breed: <span>{pet.breed}</span>
+              </h5>
 
               <h5>
                 Age:
                 <span>
-                  {pet.years !== 0 && `${pet.years} years`}
+                  {pet.years !== 0 && `${pet.years} years`}{' '}
                   {pet.months !== 0 && `${pet.months} months`}
                 </span>
               </h5>
@@ -132,6 +136,103 @@ const PatientListPage = () => {
                   </div>
                 </>
               )}
+
+              {pet.prescriptions.length > 0 && <h5>Pet Prescriptions:</h5>}
+              {pet.prescriptions.length > 0 &&
+                pet.prescriptions.map((pr, i) => (
+                  <div className='py-10' key={pr._id}>
+                    <h5>
+                      {i + 1}. Prescription: <span>{pr.prescription}</span>
+                    </h5>
+                    <h5>
+                      Docname: <span>{pr.docname}</span>
+                    </h5>
+                    <h5>
+                      Date: <span>{new Date(pr.date).toLocaleString()}</span>
+                    </h5>
+                    {pr.img && (
+                      <>
+                        <h5>Prescription image</h5>
+                        <div className='pet__history__img'>
+                          <img
+                            src={`http://192.168.43.242:8000/${pr.img}`}
+                            width='160'
+                            height='160'
+                            style={{ maxHeight: '160px', maxWidth: '160px' }}
+                            alt={`${pet.type}`}
+                          />
+                        </div>
+                      </>
+                    )}
+                    <hr />
+                  </div>
+                ))}
+
+              {pet.problems.length > 0 && <h5>Pet Problems: </h5>}
+              {pet.problems.length > 0 &&
+                pet.problems.map((pb, i) => (
+                  <div className='pet__problems py-10' key={pb._id}>
+                    <h5>
+                      {i + 1}. Problem: <span>{pb.problem}</span>
+                    </h5>
+                    <h5>
+                      Docname: <span>{pb.docname}</span>
+                    </h5>
+                    <h5>
+                      Time Period: <span>{pb.time}</span>
+                    </h5>
+                    <h5>
+                      Appetite: <span>{pb.Appetite}</span>
+                    </h5>
+                    <h5>
+                      Behaviour: <span>{pb.Behaviour}</span>
+                    </h5>
+                    <h5>
+                      Ears: <span>{pb.Ears}</span>
+                    </h5>
+                    <h5>
+                      Eyes: <span>{pb.Eyes}</span>
+                    </h5>
+                    <h5>
+                      Faces: <span>{pb.Feces}</span>
+                    </h5>
+                    <h5>
+                      Gait: <span>{pb.Gait}</span>
+                    </h5>
+                    <h5>
+                      Mucous: <span>{pb.Mucous}</span>
+                    </h5>
+                    <h5>
+                      Skin: <span>{pb.Skin}</span>
+                    </h5>
+                    <h5>
+                      Urine: <span>{pb.Urine}</span>
+                    </h5>
+                    <h5>
+                      Comment: <span>{pb.comment}</span>
+                    </h5>
+
+                    {pb.images.length && <h5>Pet Problem image</h5>}
+                    <div className='pet__history__images'>
+                      {pb.images.length > 0 &&
+                        pb.images.map((img, i) => (
+                          <div
+                            key={`${img}-${i}`}
+                            className='pet__history__img'
+                          >
+                            <img
+                              src={`http://192.168.43.242:8000/${img}`}
+                              width='160'
+                              height='160'
+                              style={{ maxHeight: '160px', maxWidth: '160px' }}
+                              alt={`${pet.type}`}
+                            />
+                          </div>
+                        ))}
+                    </div>
+                    <hr />
+                  </div>
+                ))}
             </div>
           )}
         </Modal>
