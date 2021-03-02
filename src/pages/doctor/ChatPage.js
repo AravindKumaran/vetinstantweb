@@ -9,6 +9,7 @@ import LoadingSpinner from 'components/shared/UI/LoadingSpinner'
 import { FiSend } from 'react-icons/fi'
 import { useAuth } from 'context/use-auth'
 import socket from 'services/socket'
+import { nanoid } from 'nanoid'
 
 import './ChatPage.css'
 import client from 'services/client'
@@ -31,6 +32,7 @@ const ChatPage = () => {
             Authorization: `Bearer ${localStorage.token}`,
           },
         })
+        // console.log('Res', chatRes)
         const sortedChat = chatRes.data.chats.sort(
           (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
         )
@@ -45,6 +47,7 @@ const ChatPage = () => {
           setMessages(sortedData)
         })
       } catch (error) {
+        console.log('Error', error)
         setLoading(false)
         toast.error(
           error.response?.data?.msg || 'Something went wrong! Please try again!'
@@ -53,31 +56,31 @@ const ChatPage = () => {
     }
 
     getAllChats()
+    // console.log('Socket', socket)
   }, [])
 
   const handleSendMessage = async ({ msg }) => {
     // console.log('Mssd', msg)
     const newMsg = {
-      _id: (new Date() * 1000).toString(),
       text: msg,
-      createdAt: new Date().toISOString(),
       roomName: roomName,
       petId: petId,
-      user: {
-        _id: user._id,
-        name: user.name,
-      },
+      userId: user._id,
+      userName: user.name,
     }
+
+    // console.log('NewMsg', newMsg)
 
     try {
       setLoading(true)
-      await client.post('/chats', newMsg, {
+      const res = await client.post('/chats', newMsg, {
         headers: {
           Authorization: `Bearer ${localStorage.token}`,
         },
       })
+      console.log('ResPost', res.data.newChat)
       setLoading(false)
-      const allMsg = [...messages, newMsg].sort(
+      const allMsg = [...messages, res.data.newChat].sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       )
       socket.emit('chat', {
@@ -105,7 +108,7 @@ const ChatPage = () => {
                 <div
                   key={msg._id}
                   className={
-                    msg.user._id === user._id
+                    msg.userId === user._id
                       ? 'chat__messages__local'
                       : 'chat__messages__remote'
                   }
@@ -113,7 +116,7 @@ const ChatPage = () => {
                   <div className=' message'>
                     <p
                       className={
-                        msg.user._id === user._id ? 'local__msg' : 'remote__msg'
+                        msg.userId === user._id ? 'local__msg' : 'remote__msg'
                       }
                     >
                       {msg.text}
