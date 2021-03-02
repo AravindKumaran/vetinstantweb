@@ -194,7 +194,7 @@ const PatientListPage = () => {
                       Eyes: <span>{pb.Eyes}</span>
                     </h5>
                     <h5>
-                      Faces: <span>{pb.Feces}</span>
+                      Feces: <span>{pb.Feces}</span>
                     </h5>
                     <h5>
                       Gait: <span>{pb.Gait}</span>
