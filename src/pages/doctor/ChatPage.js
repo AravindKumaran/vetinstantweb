@@ -33,18 +33,25 @@ const ChatPage = () => {
           },
         })
         // console.log('Res', chatRes)
-        const sortedChat = chatRes.data.chats.sort(
-          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-        )
-        setMessages(sortedChat)
+        // const sortedChat = chatRes.data.chats.sort(
+        //   (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        // )
+        const newMessages = chatRes.data.chats.map((msg) => {
+          return {
+            ...msg,
+            user: {
+              _id: msg.userId,
+              name: msg.userName,
+            },
+          }
+        })
+        setMessages(newMessages)
         setLoading(false)
 
         socket.emit('room', roomName)
         socket.on('chat', (data) => {
-          const sortedData = data.sort(
-            (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-          )
-          setMessages(sortedData)
+          // console.log('Data', sortedData)
+          setMessages(data)
         })
       } catch (error) {
         console.log('Error', error)
@@ -79,8 +86,13 @@ const ChatPage = () => {
         },
       })
       console.log('ResPost', res.data.newChat)
+      const chat = res.data.newChat
+      chat.user = {
+        _id: chat.userId,
+        name: chat.userName,
+      }
       setLoading(false)
-      const allMsg = [...messages, res.data.newChat].sort(
+      const allMsg = [...messages, chat].sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       )
       socket.emit('chat', {
