@@ -26,7 +26,7 @@ const Header = () => {
             <NavLink to='/prescription'>Prescription</NavLink>
           </li>
           <li>
-            <NavLink to='/call-log'>CallLogs</NavLink>
+            <NavLink to='/call-log'>Call Log</NavLink>
           </li>
           {isAuthenticated && (
             <li>

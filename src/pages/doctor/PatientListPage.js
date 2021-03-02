@@ -73,7 +73,7 @@ const PatientListPage = () => {
       {open && (
         <Modal
           toggle={toggleModal}
-          title={`${currentPatient.senderName} pet details`}
+          title={`${currentPatient.senderName}'s Pet Details`}
         >
           <div className='chat-video_wrapper flex-center'>
             <Link
@@ -105,17 +105,17 @@ const PatientListPage = () => {
                 Gender: <span>{pet.gender}</span>
               </h5>
               <h5>
-                Pet Type: <span>{pet.type}</span>
+                Species: <span>{pet.type}</span>
               </h5>
               <h5>
-                Pet Breed: <span>{pet.breed}</span>
+                Breed: <span>{pet.breed}</span>
               </h5>
 
               <h5>
                 Age:
                 <span>
-                  {pet.years !== 0 && `${pet.years} years`}{' '}
-                  {pet.months !== 0 && `${pet.months} months`}
+                  {pet.years !== 0 && `${pet.years} Years`}{' '}
+                  {pet.months !== 0 && `${pet.months} Months`}
                 </span>
               </h5>
 
@@ -145,7 +145,7 @@ const PatientListPage = () => {
                       {i + 1}. Prescription: <span>{pr.prescription}</span>
                     </h5>
                     <h5>
-                      Docname: <span>{pr.docname}</span>
+                      Doctor's Name: <span>{pr.docname}</span>
                     </h5>
                     <h5>
                       Date: <span>{new Date(pr.date).toLocaleString()}</span>
@@ -176,7 +176,7 @@ const PatientListPage = () => {
                       {i + 1}. Problem: <span>{pb.problem}</span>
                     </h5>
                     <h5>
-                      Docname: <span>{pb.docname}</span>
+                      Doctor's Name: <span>{pb.docname}</span>
                     </h5>
                     <h5>
                       Time Period: <span>{pb.time}</span>
@@ -194,7 +194,7 @@ const PatientListPage = () => {
                       Eyes: <span>{pb.Eyes}</span>
                     </h5>
                     <h5>
-                      Faces: <span>{pb.Feces}</span>
+                      Feces: <span>{pb.Feces}</span>
                     </h5>
                     <h5>
                       Gait: <span>{pb.Gait}</span>
@@ -244,7 +244,7 @@ const PatientListPage = () => {
       )}
 
       {patients.length > 0 && (
-        <h3 className='text-center'>Here are your patients list:</h3>
+        <h3 className='text-center'>Patients List:</h3>
       )}
       {patients.length > 0 && (
         <div className='center'>

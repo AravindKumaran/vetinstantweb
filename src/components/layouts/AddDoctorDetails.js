@@ -280,7 +280,7 @@ const AddDoctorDetails = () => {
           />
 
           <Input
-            label='Account Number'
+            label='Bank Account Number'
             type='numeric'
             name='acc'
             maxLength={18}
@@ -290,9 +290,9 @@ const AddDoctorDetails = () => {
           />
 
           <Input
-            label='Name On Card'
+            label='Account Holder Name'
             name='accname'
-            placeholder='Name On Card'
+            placeholder='Account Holder Name'
             myRef={register}
             error={errors.accname}
           />
