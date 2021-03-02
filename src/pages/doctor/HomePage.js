@@ -47,11 +47,15 @@ const HomePage = () => {
     <Layout>
       {loading && <LoadingSpinner asOverlay />}
       {user && (
-        <h2 className='doc__title text-center'>Welcome Doctor: {user.name}</h2>
+        <h2 className='doc__title text-center'>Welcome Doctor {user.name}</h2>
       )}
       {doctorDetails ? (
         <div className='doctor'>
-          <h4>Here are your Details: </h4>
+          <h4>Details: </h4>
+          <div className='doctor__card'>
+            <h5>Registration Number :</h5>
+            <p>{doctorDetails.regNo}</p>
+          </div>
           <div className='doctor__card'>
             <h5>Phone Number:</h5>
             <p>{doctorDetails.phone}</p>
@@ -68,16 +72,14 @@ const HomePage = () => {
             <h5> Qualifications :</h5>
             <p>{doctorDetails.qlf}</p>
           </div>
+         
+          <h4>Billing Details: </h4>
           <div className='doctor__card'>
-            <h5>Registration Number :</h5>
-            <p>{doctorDetails.regNo}</p>
-          </div>
-          <div className='doctor__card'>
-            <h5>Account Number :</h5>
+            <h5>Bank Account Number :</h5>
             <p>{doctorDetails.accno}</p>
           </div>
           <div className='doctor__card'>
-            <h5>Name On Card :</h5>
+            <h5>Account Holder Name :</h5>
             <p>{doctorDetails.accname}</p>
           </div>
           <div className='doctor__card'>
@@ -89,13 +91,13 @@ const HomePage = () => {
             <p>{doctorDetails.ifsc}</p>
           </div>
           <div className='doctor__card'>
-            <h5>Your Form File :</h5>
+            <h5>Registration Certificate :</h5>
             <p>{doctorDetails.file}</p>
           </div>
-          <div className='doctor__card'>
+          {/* <div className='doctor__card'>
             <h5>Your Profile File :</h5>
             <p>{doctorDetails.profile}</p>
-          </div>
+          </div> */}
         </div>
       ) : (
         <>
