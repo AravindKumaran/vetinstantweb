@@ -119,7 +119,7 @@ const PatientListPage = () => {
                 </span>
               </h5>
 
-              {pet.petHistoryImages.length > 0 && (
+              {pet?.petHistoryImages?.length > 0 && (
                 <>
                   <h5>Pet History Images: </h5>
                   <div className='pet__history__images'>
@@ -137,8 +137,8 @@ const PatientListPage = () => {
                 </>
               )}
 
-              {pet.prescriptions.length > 0 && <h5>Pet Prescriptions:</h5>}
-              {pet.prescriptions.length > 0 &&
+              {pet?.prescriptions?.length > 0 && <h5>Pet Prescriptions:</h5>}
+              {pet?.prescriptions?.length > 0 &&
                 pet.prescriptions.map((pr, i) => (
                   <div className='py-10' key={pr._id}>
                     <h5>
@@ -168,8 +168,8 @@ const PatientListPage = () => {
                   </div>
                 ))}
 
-              {pet.problems.length > 0 && <h5>Pet Problems: </h5>}
-              {pet.problems.length > 0 &&
+              {pet?.problems?.length > 0 && <h5>Pet Problems: </h5>}
+              {pet?.problems?.length > 0 &&
                 pet.problems.map((pb, i) => (
                   <div className='pet__problems py-10' key={pb._id}>
                     <h5>
@@ -212,9 +212,9 @@ const PatientListPage = () => {
                       Comment: <span>{pb.comment}</span>
                     </h5>
 
-                    {pb.images.length && <h5>Pet Problem image</h5>}
+                    {pb?.images?.length && <h5>Pet Problem image</h5>}
                     <div className='pet__history__images'>
-                      {pb.images.length > 0 &&
+                      {pb?.images?.length > 0 &&
                         pb.images.map((img, i) => (
                           <div
                             key={`${img}-${i}`}
@@ -243,9 +243,7 @@ const PatientListPage = () => {
         </h3>
       )}
 
-      {patients.length > 0 && (
-        <h3 className='text-center'>Patients List:</h3>
-      )}
+      {patients.length > 0 && <h3 className='text-center'>Patients List:</h3>}
       {patients.length > 0 && (
         <div className='center'>
           {patients.map((pat) => (

@@ -72,32 +72,33 @@ const HomePage = () => {
             <h5> Qualifications :</h5>
             <p>{doctorDetails.qlf}</p>
           </div>
-         
-          <h4>Billing Details: </h4>
-          <div className='doctor__card'>
-            <h5>Bank Account Number :</h5>
-            <p>{doctorDetails.accno}</p>
-          </div>
-          <div className='doctor__card'>
-            <h5>Account Holder Name :</h5>
-            <p>{doctorDetails.accname}</p>
-          </div>
-          <div className='doctor__card'>
-            <h5>Account Type :</h5>
-            <p>{doctorDetails.acctype}</p>
-          </div>
-          <div className='doctor__card'>
-            <h5>IFSC Code :</h5>
-            <p>{doctorDetails.ifsc}</p>
-          </div>
+
+          {+doctorDetails.fee > 0 && (
+            <>
+              <h4>Billing Details: </h4>
+              <div className='doctor__card'>
+                <h5>Bank Account Number :</h5>
+                <p>{doctorDetails.accno}</p>
+              </div>
+              <div className='doctor__card'>
+                <h5>Account Holder Name :</h5>
+                <p>{doctorDetails.accname}</p>
+              </div>
+              <div className='doctor__card'>
+                <h5>Account Type :</h5>
+                <p>{doctorDetails.acctype}</p>
+              </div>
+              <div className='doctor__card'>
+                <h5>IFSC Code :</h5>
+                <p>{doctorDetails.ifsc}</p>
+              </div>
+            </>
+          )}
+
           <div className='doctor__card'>
             <h5>Registration Certificate :</h5>
             <p>{doctorDetails.file}</p>
           </div>
-          {/* <div className='doctor__card'>
-            <h5>Your Profile File :</h5>
-            <p>{doctorDetails.profile}</p>
-          </div> */}
         </div>
       ) : (
         <>
