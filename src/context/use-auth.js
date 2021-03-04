@@ -15,6 +15,12 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'LOADING':
+      return {
+        ...state,
+        loading: true,
+      }
+
     case 'LOGIN_SUCCESS':
     case 'REGISTER_SUCCESS':
       localStorage.setItem('token', action.payload)
@@ -54,12 +60,6 @@ function reducer(state, action) {
         isAuthenticated: false,
         user: null,
         error: null,
-      }
-
-    case 'LOADING':
-      return {
-        ...state,
-        loading: true,
       }
 
     case 'CLEAR_ERRORS':

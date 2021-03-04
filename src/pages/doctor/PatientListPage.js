@@ -188,13 +188,10 @@ const PatientListPage = () => {
                       Behaviour: <span>{pb.Behaviour}</span>
                     </h5>
                     <h5>
-                      Ears: <span>{pb.Ears}</span>
-                    </h5>
-                    <h5>
                       Eyes: <span>{pb.Eyes}</span>
                     </h5>
                     <h5>
-                      Feces: <span>{pb.Feces}</span>
+                      Comment: <span>{pb.comment}</span>
                     </h5>
                     <h5>
                       Gait: <span>{pb.Gait}</span>
@@ -202,15 +199,28 @@ const PatientListPage = () => {
                     <h5>
                       Mucous: <span>{pb.Mucous}</span>
                     </h5>
-                    <h5>
-                      Skin: <span>{pb.Skin}</span>
-                    </h5>
-                    <h5>
-                      Urine: <span>{pb.Urine}</span>
-                    </h5>
-                    <h5>
-                      Comment: <span>{pb.comment}</span>
-                    </h5>
+
+                    {pb.Ears?.length > 0 && <h5>Ears: </h5>}
+
+                    {pb.Ears?.length > 0 &&
+                      pb.Ears.map((er, i) => <h3 key={`${i}-Ears`}> {er}</h3>)}
+
+                    {pb.Feces?.length > 0 && <h5>Faces: </h5>}
+
+                    {pb.Feces?.length > 0 &&
+                      pb.Feces.map((fc, i) => (
+                        <h3 key={`Feces ${i}`}> {fc}</h3>
+                      ))}
+                    {pb.Urine?.length > 0 && <h5>Urines: </h5>}
+
+                    {pb.Urine?.length > 0 &&
+                      pb.Urine.map((ur, i) => (
+                        <h3 key={`Urines ${i}`}> {ur}</h3>
+                      ))}
+                    {pb.Skin?.length > 0 && <h5>Skins: </h5>}
+
+                    {pb.Skin?.length > 0 &&
+                      pb.Skin.map((sk, i) => <h3 key={`Skins ${i}`}> {sk}</h3>)}
 
                     {pb?.images?.length && <h5>Pet Problem image</h5>}
                     <div className='pet__history__images'>

@@ -41,7 +41,7 @@ const LoginPage = () => {
   }, [error, isAuthenticated])
 
   const onSubmit = ({ email, password }) => {
-    console.log('cliekd')
+    // console.log('cliekd')
     loginUser({
       emailID: email,
       password,
