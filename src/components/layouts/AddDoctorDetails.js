@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -31,6 +31,7 @@ const firstAv = [
 const phoneRegExp = /^[6-9]\d{9}$/
 const ifscRegExp = /^[A-Z]{4}0[A-Z0-9]{6}$/
 const accRegExp = /^[0-9]{9,18}$/
+const feeRegExp = /^[0-9]+$/
 
 const validationSchema = Yup.object().shape({
   hospname: Yup.string()
@@ -76,42 +77,70 @@ const validationSchema = Yup.object().shape({
       }
     )
     .label('Document'),
-  profile: Yup.mixed()
-    .required('Please select a .pdf profile file')
-    .test(
-      'profileSize',
-      'Please select a .pdf file of size less than 5 Mb',
-      (value) => {
-        console.log('Fielss', value)
-        if (value && value[0].type !== 'application/pdf') {
-          return false
-        }
-        return value && value[0].size <= 5000000
-      }
-    )
-    .label('Profile'),
-  acc: Yup.string()
-    .matches(accRegExp, 'Account Number not valid!')
-    .required()
-    .label('Account No.'),
-  accname: Yup.string().required().label('Name'),
-  type: Yup.string().required('Please Pick Account Type').label('Account Type'),
+  // profile: Yup.mixed()
+  //   .required('Please select a .pdf profile file')
+  //   .test(
+  //     'profileSize',
+  //     'Please select a .pdf file of size less than 5 Mb',
+  //     (value) => {
+  //       console.log('Fielss', value)
+  //       if (value && value[0].type !== 'application/pdf') {
+  //         return false
+  //       }
+  //       return value && value[0].size <= 5000000
+  //     }
+  //   )
+  //   .label('Profile'),
+  regNo: Yup.string().required().label('Registration Number'),
+  firstAvailaibeVet: Yup.string().required().label('First Available Vet'),
   qlf: Yup.string()
     .required('Please Pick a Qualifications')
     .label('Qualifications'),
-  ifsc: Yup.string()
-    .matches(ifscRegExp, 'IFSC code is not valid!')
+
+  fee: Yup.string()
+    .matches(feeRegExp, 'Please enter your fee')
     .required()
+    .label('Consultation Fee'),
+  acc: Yup.string()
+    .matches(accRegExp, 'Bank Account Number not valid!')
+    .test('acctest', 'Account number is required', function (value) {
+      const { fee } = this.parent
+      if (fee > 0 && !value) return false
+      return true
+    })
+    .label('Account No.'),
+  accname: Yup.string()
+    .test('accnametest', 'Account name is required', function (value) {
+      const { fee } = this.parent
+      if (fee > 0 && !value) return false
+      return true
+    })
+    .label('Name'),
+  type: Yup.string()
+    .test('acctyppe', 'Please select account type', function (value) {
+      const { fee } = this.parent
+      if (fee > 0 && !value) return false
+      return true
+    })
+    .label('Account Type'),
+  // .nullable()
+
+  ifsc: Yup.string()
+    .test('accifsc', 'IFSC code is required', function (value) {
+      const { fee } = this.parent
+      if (fee > 0 && !value) return false
+      return true
+    })
+    .matches(ifscRegExp, 'IFSC code is not valid!')
     .label('IFSC Code'),
-  fee: Yup.string().required().label('Consultation Fee'),
-  regNo: Yup.string().required().label('Registration Number'),
-  firstAvailaibeVet: Yup.string().required().label('First Available Vet'),
 })
 
 const AddDoctorDetails = () => {
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, watch } = useForm({
     resolver: yupResolver(validationSchema),
   })
+  const feeRef = useRef()
+  feeRef.current = watch('fee', '')
 
   const [loading, setLoading] = useState(false)
   const [hospitals, setHopitals] = useState([])
@@ -171,16 +200,18 @@ const AddDoctorDetails = () => {
     }
 
     data.append('file', values.file[0])
-    data.append('profile', values.profile[0])
+    // data.append('profile', values.profile[0])
     data.append('phone', values.phone)
-    data.append('accno', values.acc)
-    data.append('accname', values.accname)
-    data.append('acctype', values.type)
-    data.append('ifsc', values.ifsc)
-    data.append('fee', values.fee)
     data.append('qlf', values.qlf)
     data.append('firstAvailaibeVet', values.firstAvailaibeVet)
     data.append('regNo', values.regNo)
+    data.append('fee', values.fee)
+    if (+values.fee > 0) {
+      data.append('accno', values.acc)
+      data.append('accname', values.accname)
+      data.append('acctype', values.type)
+      data.append('ifsc', values.ifsc)
+    }
 
     // for (var key of data.entries()) {
     //   console.log(key[0] + ', ' + key[1])
@@ -279,47 +310,52 @@ const AddDoctorDetails = () => {
             error={errors.fee}
           />
 
-          <Input
-            label='Bank Account Number'
-            type='numeric'
-            name='acc'
-            maxLength={18}
-            placeholder='xxxx xxxx xxxx xxxx'
-            myRef={register}
-            error={errors.acc}
-          />
+          {Number(feeRef.current) > 0 && (
+            <>
+              <Input
+                label='Bank Account Number'
+                type='numeric'
+                name='acc'
+                maxLength={18}
+                placeholder='xxxx xxxx xxxx xxxx'
+                myRef={register}
+                error={errors.acc}
+              />
 
-          <Input
-            label='Account Holder Name'
-            name='accname'
-            placeholder='Account Holder Name'
-            myRef={register}
-            error={errors.accname}
-          />
+              <Input
+                label='Account Holder Name'
+                name='accname'
+                placeholder='Account Holder Name'
+                myRef={register}
+                error={errors.accname}
+              />
 
-          <Select
-            data={accType}
-            label='Account Type'
-            name='type'
-            myRef={register}
-            error={errors.type}
-          />
+              <Select
+                data={accType}
+                label='Account Type'
+                name='type'
+                myRef={register}
+                error={errors.type}
+              />
 
-          <Input
-            label='IFSC Code'
-            name='ifsc'
-            placeholder='Enter your bank ifsc code'
-            maxLength={11}
-            myRef={register}
-            error={errors.ifsc}
-          />
-          <Input
+              <Input
+                label='IFSC Code'
+                name='ifsc'
+                placeholder='Enter your bank ifsc code'
+                maxLength={11}
+                myRef={register}
+                error={errors.ifsc}
+              />
+            </>
+          )}
+
+          {/* <Input
             label='Profile Document'
             type='file'
             name='profile'
             myRef={register}
             error={errors.profile}
-          />
+          /> */}
 
           <Button classNames='full' type='submit'>
             Submit
