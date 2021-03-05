@@ -125,8 +125,14 @@ const PatientListPage = () => {
                   <div className='pet__history__images'>
                     {pet.petHistoryImages.map((img, i) => (
                       <div key={`${img}-${i}`} className='pet__history__img'>
+                        {/* <img
+                          src={`http://192.168.43.242:8000/img/${img}`}
+                          width='160'
+                          height='160'
+                          alt={`${pet.type}`}
+                        /> */}
                         <img
-                          src={`http://192.168.43.242:8000/${img}`}
+                          src={`https://vetinstantbe.azurewebsites.net/img/${img}`}
                           width='160'
                           height='160'
                           alt={`${pet.type}`}
@@ -154,8 +160,15 @@ const PatientListPage = () => {
                       <>
                         <h5>Prescription image</h5>
                         <div className='pet__history__img'>
-                          <img
+                          {/* <img
                             src={`http://192.168.43.242:8000/${pr.img}`}
+                            width='160'
+                            height='160'
+                            style={{ maxHeight: '160px', maxWidth: '160px' }}
+                            alt={`${pet.type}`}
+                          /> */}
+                          <img
+                            src={`https://vetinstantbe.azurewebsites.net/img/${pr.img}`}
                             width='160'
                             height='160'
                             style={{ maxHeight: '160px', maxWidth: '160px' }}
@@ -230,8 +243,15 @@ const PatientListPage = () => {
                             key={`${img}-${i}`}
                             className='pet__history__img'
                           >
-                            <img
+                            {/* <img
                               src={`http://192.168.43.242:8000/${img}`}
+                              width='160'
+                              height='160'
+                              style={{ maxHeight: '160px', maxWidth: '160px' }}
+                              alt={`${pet.type}`}
+                            /> */}
+                            <img
+                              src={`https://vetinstantbe.azurewebsites.net/img/${img}`}
                               width='160'
                               height='160'
                               style={{ maxHeight: '160px', maxWidth: '160px' }}
