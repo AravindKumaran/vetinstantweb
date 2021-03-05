@@ -98,6 +98,9 @@ const PatientListPage = () => {
           {pet && (
             <div className='pet__details'>
               <h5>
+                Date: <span>{new Date(pet.createdAt).toLocaleString()}</span>
+              </h5>
+              <h5>
                 Weight: <span>{pet.weight} Kg</span>
               </h5>
 
