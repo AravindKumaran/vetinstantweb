@@ -158,7 +158,13 @@ const HomePage = () => {
 
           <div className='doctor__card'>
             <h5>Registration Certificate :</h5>
-            <p>{doctorDetails.file}</p>
+            <a
+              style={{ cursor: 'pointer' }}
+              href={doctorDetails.file}
+              target='_blank'
+            >
+              {doctorDetails.file.split('/documents/')[1]}
+            </a>
           </div>
         </div>
       ) : (

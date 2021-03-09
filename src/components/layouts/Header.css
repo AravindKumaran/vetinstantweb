@@ -5,7 +5,7 @@
   padding: 1.5rem;
 }
 
-.nav__list {
+.nav .nav__list {
   display: flex;
   align-items: center;
 }
