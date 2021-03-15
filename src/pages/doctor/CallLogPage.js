@@ -37,13 +37,18 @@ const CallLogPage = () => {
         })
 
         const callLogsArray = res.data.callLogs
+        const msCall = []
+        const cmCall = []
         callLogsArray.forEach((log) => {
           if (log.callPending) {
-            setMissedCall((prevLog) => [...prevLog, log])
+            msCall.push(log)
           } else {
-            setCompletedCall((prevLog) => [...prevLog, log])
+            cmCall.push(log)
           }
         })
+
+        setMissedCall(msCall)
+        setCompletedCall(cmCall)
         setLoading(false)
       } catch (error) {
         setLoading(false)
@@ -115,7 +120,7 @@ const CallLogPage = () => {
               dateFormat='h:mm aa'
               customInput={<DateTimeInput time={true} />}
             />
-            
+
             <h4>Choose Date</h4>
             <DatePicker
               selected={startDate}
