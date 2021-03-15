@@ -1,3 +1,11 @@
+.pat__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .patient__list {
   background-color: #fff;
   padding: 10px 20px;
@@ -37,6 +45,7 @@
 .patient__list__item__name {
   font-size: 2.3rem;
   text-transform: capitalize;
+  line-height: 1.5;
 }
 
 .pet__details {

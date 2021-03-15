@@ -128,10 +128,17 @@ const PatientListPage = () => {
                   <div className='pet__history__images'>
                     {pet.petHistoryImages.map((img, i) => (
                       <div key={`${img}-${i}`} className='pet__history__img'>
+                        {/* <img
+                          src={`http://192.168.43.242:8000/img/${img}`}
+                          width='200'
+                          height='200'
+                          alt={`${pet.type}`}
+                        /> */}
                         <img
-                          src={`http://192.168.43.242:8000/${img}`}
-                          width='160'
-                          height='160'
+                          src={`${img}`}
+                          width='200'
+                          height='200'
+                          style={{ objectFit: 'cover' }}
                           alt={`${pet.type}`}
                         />
                       </div>
@@ -157,11 +164,22 @@ const PatientListPage = () => {
                       <>
                         <h5>Prescription image</h5>
                         <div className='pet__history__img'>
-                          <img
+                          {/* <img
                             src={`http://192.168.43.242:8000/${pr.img}`}
-                            width='160'
-                            height='160'
-                            style={{ maxHeight: '160px', maxWidth: '160px' }}
+                            width='200'
+                            height='200'
+                            style={{ maxHeight: '200px', maxWidth: '200px' }}
+                            alt={`${pet.type}`}
+                          /> */}
+                          <img
+                            src={`${pr.img}`}
+                            width='200'
+                            height='200'
+                            style={{
+                              maxHeight: '200px',
+                              maxWidth: '200px',
+                              objectFit: 'cover',
+                            }}
                             alt={`${pet.type}`}
                           />
                         </div>
@@ -233,11 +251,22 @@ const PatientListPage = () => {
                             key={`${img}-${i}`}
                             className='pet__history__img'
                           >
-                            <img
+                            {/* <img
                               src={`http://192.168.43.242:8000/${img}`}
-                              width='160'
-                              height='160'
-                              style={{ maxHeight: '160px', maxWidth: '160px' }}
+                              width='200'
+                              height='200'
+                              style={{ maxHeight: '200px', maxWidth: '200px' }}
+                              alt={`${pet.type}`}
+                            /> */}
+                            <img
+                              src={`${img}`}
+                              width='200'
+                              height='200'
+                              style={{
+                                maxHeight: '200px',
+                                maxWidth: '200px',
+                                objectFit: 'cover',
+                              }}
                               alt={`${pet.type}`}
                             />
                           </div>
@@ -258,7 +287,7 @@ const PatientListPage = () => {
 
       {patients.length > 0 && <h3 className='text-center'>Patients List:</h3>}
       {patients.length > 0 && (
-        <div className='center'>
+        <div className='pat__grid center'>
           {patients.map((pat) => (
             <div
               key={pat._id}
