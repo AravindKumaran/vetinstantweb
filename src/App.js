@@ -15,6 +15,7 @@ import ChatPage from 'pages/doctor/ChatPage'
 import CallLogPage from 'pages/doctor/CallLogPage'
 import ForgotPasswordPage from 'pages/auth/ForgotPasswordPage'
 import ResetPasswordPage from 'pages/auth/ResetPasswordPage'
+import PendingCallPage from 'pages/doctor/PendingCallPage'
 
 const App = () => {
   const { loadUser } = useAuth()
@@ -35,6 +36,11 @@ const App = () => {
         <PrivateRoute exact path='/video-call/:id' component={VideoCallPage} />
         <PrivateRoute exact path='/chat/:id' component={ChatPage} />
         <PrivateRoute exact path='/call-log' component={CallLogPage} />
+        <PrivateRoute
+          exact
+          path='/call-log/pending'
+          component={PendingCallPage}
+        />
         <Route path='/register' component={RegisterPage} />
         <Route path='/login' component={LoginPage} />
         <Route path='/forgotPassword' component={ForgotPasswordPage} />

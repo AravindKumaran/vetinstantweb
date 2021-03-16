@@ -8,7 +8,6 @@ import LoadingSpinner from 'components/shared/UI/LoadingSpinner'
 import AddDoctorDetails from 'components/layouts/AddDoctorDetails'
 
 import './HomePage.css'
-import socket from 'services/socket'
 
 const HomePage = () => {
   const { loadUser, user } = useAuth()
@@ -16,65 +15,69 @@ const HomePage = () => {
   const [doctorDetails, setDoctorDetails] = useState()
 
   useEffect(() => {
-    const data = async () => {
-      await loadUser()
-      const sendPushToken = async (token, message, status) => {
-        setLoading(true)
-
-        const pushData = {
-          targetExpoPushToken: token,
-          title: `Response from Dr. ${user.name}`,
-          message: message,
-          datas: { token: user.token || null, status },
-        }
-        try {
-          await client.post('/users/sendNotification', pushData, {
-            headers: {
-              Authorization: `Bearer ${localStorage.token}`,
-            },
-          })
-          setLoading(false)
-        } catch (err) {
-          setLoading(false)
-          toast.error(
-            err.response?.data.msg || 'Something Went Wrong! Try Again Later'
-          )
-        }
-      }
-      socket.on('videoCall', (data) => {
-        console.log('SocketData', data, user)
-        if (user) {
-          if (data.docId === user?._id && data.paymentDone === false) {
-            if (
-              window.confirm(
-                `Incoming Call Request from pet Owner ${data.name}`
-              )
-            ) {
-              sendPushToken(
-                data.token,
-                "Yes I'm available. Complete The Payment Within 5-10 Minutes",
-                'ok'
-              )
-            } else {
-              sendPushToken(
-                data.token,
-                `Sorry! I'm Not Available. Please Try With Other Available Doctors`,
-                'cancel'
-              )
-            }
-          }
-
-          if (data.docId === user._id && data.paymentDone === true) {
-            alert(
-              `Pet Owner ${data.name} Response! \n I have started the call Please join it.`
-            )
-          }
-        }
-      })
-    }
-    data()
-    // eslint-disable-next-line
+    loadUser()
   }, [])
+
+  // useEffect(() => {
+  //   const data = async () => {
+  //     await loadUser()
+  //     const sendPushToken = async (token, message, status) => {
+  //       setLoading(true)
+
+  //       const pushData = {
+  //         targetExpoPushToken: token,
+  //         title: `Response from Dr. ${user.name}`,
+  //         message: message,
+  //         datas: { token: user.token || null, status },
+  //       }
+  //       try {
+  //         await client.post('/users/sendNotification', pushData, {
+  //           headers: {
+  //             Authorization: `Bearer ${localStorage.token}`,
+  //           },
+  //         })
+  //         setLoading(false)
+  //       } catch (err) {
+  //         setLoading(false)
+  //         toast.error(
+  //           err.response?.data.msg || 'Something Went Wrong! Try Again Later'
+  //         )
+  //       }
+  //     }
+  //     socket.on('videoCall', (data) => {
+  //       console.log('SocketData', data, user)
+  //       if (user) {
+  //         if (data.docId === user?._id && data.paymentDone === false) {
+  //           if (
+  //             window.confirm(
+  //               `Incoming Call Request from pet Owner ${data.name}`
+  //             )
+  //           ) {
+  //             sendPushToken(
+  //               data.token,
+  //               "Yes I'm available. Complete The Payment Within 5-10 Minutes",
+  //               'ok'
+  //             )
+  //           } else {
+  //             sendPushToken(
+  //               data.token,
+  //               `Sorry! I'm Not Available. Please Try With Other Available Doctors`,
+  //               'cancel'
+  //             )
+  //           }
+  //         }
+
+  //         if (data.docId === user._id && data.paymentDone === true) {
+  //           alert(
+  //             `Pet Owner ${data.name} Response! \n I have started the call Please join it.`
+  //           )
+  //         }
+  //       }
+  //     })
+  //   }
+  //   data()
+  //   // eslint-disable-next-line
+  // }, [])
 
   // useEffect(() => {
 

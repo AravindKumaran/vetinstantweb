@@ -15,6 +15,7 @@ import Modal from 'components/shared/UI/Modal'
 import DatePicker from 'react-datepicker'
 import DateTimeInput from 'components/layouts/DateTimeInput'
 import Button from 'components/shared/Forms/Button'
+import { Link } from 'react-router-dom'
 
 const CallLogPage = () => {
   const { user } = useAuth()
@@ -134,6 +135,11 @@ const CallLogPage = () => {
           </Button>
         </Modal>
       )}
+      <div className='flex-center'>
+        <Link to='/call-log/pending' className='btn'>
+          See Pending Calls
+        </Link>
+      </div>
       <div className='call-log__container'>
         <div className='missed__call call__common'>
           <h2 className='text-center'>Missed Calls</h2>
