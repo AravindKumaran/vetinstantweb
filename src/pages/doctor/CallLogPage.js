@@ -15,6 +15,7 @@ import Modal from 'components/shared/UI/Modal'
 import DatePicker from 'react-datepicker'
 import DateTimeInput from 'components/layouts/DateTimeInput'
 import Button from 'components/shared/Forms/Button'
+import { Link } from 'react-router-dom'
 
 const CallLogPage = () => {
   const { user } = useAuth()
@@ -37,13 +38,18 @@ const CallLogPage = () => {
         })
 
         const callLogsArray = res.data.callLogs
+        const msCall = []
+        const cmCall = []
         callLogsArray.forEach((log) => {
           if (log.callPending) {
-            setMissedCall((prevLog) => [...prevLog, log])
+            msCall.push(log)
           } else {
-            setCompletedCall((prevLog) => [...prevLog, log])
+            cmCall.push(log)
           }
         })
+
+        setMissedCall(msCall)
+        setCompletedCall(cmCall)
         setLoading(false)
       } catch (error) {
         setLoading(false)
@@ -115,7 +121,7 @@ const CallLogPage = () => {
               dateFormat='h:mm aa'
               customInput={<DateTimeInput time={true} />}
             />
-            
+
             <h4>Choose Date</h4>
             <DatePicker
               selected={startDate}
@@ -129,6 +135,11 @@ const CallLogPage = () => {
           </Button>
         </Modal>
       )}
+      <div className='flex-center'>
+        <Link to='/call-log/pending' className='btn'>
+          See Pending Calls
+        </Link>
+      </div>
       <div className='call-log__container'>
         <div className='missed__call call__common'>
           <h2 className='text-center'>Missed Calls</h2>

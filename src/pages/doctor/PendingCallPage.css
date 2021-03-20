@@ -1,0 +1,40 @@
+.pend-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 40;
+}
+
+.pend__card {
+  background-color: #fff;
+  padding: 10px 20px;
+  margin: 15px 20px;
+  border-radius: 10px;
+  width: 500px;
+}
+
+@media screen and (max-width: 768px) {
+  .pend__card {
+    width: 100%;
+  }
+}
+
+.pend__card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 5px;
+}
+
+.pet__btn {
+  background-color: transparent;
+  border: 1px solid #fc5c65;
+  color: #706868;
+}
+
+.pet__btn:hover {
+  color: #fff;
+  border: 1px solid #8040ff;
+}
