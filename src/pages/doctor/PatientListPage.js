@@ -308,3 +308,9 @@ const PatientListPage = () => {
 }
 
 export default PatientListPage
+
+
+
+
+
+
