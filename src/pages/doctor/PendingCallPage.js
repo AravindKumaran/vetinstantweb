@@ -434,7 +434,12 @@ const PendingCallPage = () => {
                     Done Successfully. Please join the call
                   </p>
                   <Link
-                    to={`/video-call/${item.userId}-${item.docId}`}
+                    to={{
+                      pathname: `/video-call/${item.userId}-${item.docId}`,
+                      state: {
+                        item,
+                      },
+                    }}
                     className='btn full'
                   >
                     Join Now
@@ -473,7 +478,12 @@ const PendingCallPage = () => {
                   </p>
                   {dayjs().isSameOrAfter(dayjs(item.extraInfo)) && (
                     <Link
-                      to={`/video-call/${item.userId}-${item.docId}`}
+                      to={{
+                        pathname: `/video-call/${item.userId}-${item.docId}`,
+                        state: {
+                          item,
+                        },
+                      }}
                       className='btn full'
                     >
                       Join Now

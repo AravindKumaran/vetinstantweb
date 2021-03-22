@@ -76,13 +76,13 @@ const PatientListPage = () => {
           title={`${currentPatient.senderName}'s Pet Details`}
         >
           <div className='chat-video_wrapper flex-center'>
-            <Link
+            {/* <Link
               to={`/video-call/${currentPatient.name}`}
               className='btn flex-center'
             >
               <FiVideo className='icon' />
               Video Call
-            </Link>
+            </Link> */}
             <Link
               to={{
                 pathname: `/chat/${currentPatient.name}`,
@@ -308,9 +308,3 @@ const PatientListPage = () => {
 }
 
 export default PatientListPage
-
-
-
-
-
-

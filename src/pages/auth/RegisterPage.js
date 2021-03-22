@@ -22,6 +22,7 @@ const LoginPage = () => {
     isAuthenticated,
     loadUser,
     loading: cLoading,
+    user,
   } = useAuth()
   const history = useHistory()
   const [loading, setLoading] = useState(false)
@@ -29,9 +30,12 @@ const LoginPage = () => {
   console.log('C', cLoading)
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && user.role === 'doctor') {
       // setAuthToken(localStorage.token)
       history.replace('/')
+    } else if (isAuthenticated && user.role === 'admin') {
+      // setAuthToken(localStorage.token)
+      history.replace('/dashboard')
     }
 
     if (error) {
