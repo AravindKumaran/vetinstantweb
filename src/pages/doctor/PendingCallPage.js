@@ -476,19 +476,20 @@ const PendingCallPage = () => {
                       {dayjs(item.extraInfo).format('DD/MM/YYYY')}
                     </span>
                   </p>
-                  {dayjs().isSameOrAfter(dayjs(item.extraInfo)) && (
-                    <Link
-                      to={{
-                        pathname: `/video-call/${item.userId}-${item.docId}`,
-                        state: {
-                          item,
-                        },
-                      }}
-                      className='btn full'
-                    >
-                      Join Now
-                    </Link>
-                  )}
+                  <Link
+                    to={{
+                      pathname: `/video-call/${item.userId}-${item.docId}`,
+                      state: {
+                        item,
+                      },
+                    }}
+                    className='btn full'
+                  >
+                    Join Now
+                  </Link>
+                  {/* {dayjs().isSameOrAfter(dayjs(item.extraInfo)) && (
+
+                  )} */}
                 </div>
               )}
 
