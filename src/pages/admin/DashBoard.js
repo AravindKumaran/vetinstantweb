@@ -55,7 +55,7 @@ const DashBoard = () => {
             Authorization: `Bearer ${localStorage.token}`,
           },
         })
-        // setDoctorDetails(res.data?.doctor)
+        console.log('docos', res.data.doctors)
         setAllDoctors(res.data.doctors)
         setLoading(false)
       } catch (err) {

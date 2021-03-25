@@ -175,6 +175,7 @@ const AddDoctorDetails = () => {
 
   const onSubmit = async (values) => {
     const data = new FormData()
+    let hsp = ''
     if (!values.selectHospName) {
       try {
         setLoading(true)
@@ -189,6 +190,7 @@ const AddDoctorDetails = () => {
             },
           }
         )
+        hsp = hosRes.data.newHospital._id
         data.append('hospital', hosRes.data.newHospital._id)
         // setLoading(false)
       } catch (error) {
@@ -196,6 +198,7 @@ const AddDoctorDetails = () => {
         toast.error(error.response.data.msg)
       }
     } else {
+      hsp = values.selectHospName
       data.append('hospital', values.selectHospName)
     }
 
@@ -219,6 +222,15 @@ const AddDoctorDetails = () => {
 
     try {
       setLoading(true)
+      await client.patch(
+        '/users/updateDoctorHosp',
+        { hospitalId: hsp },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.token}`,
+          },
+        }
+      )
       const res = await client.post('/doctors', data, {
         headers: {
           'Content-Type':
