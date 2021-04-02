@@ -92,8 +92,6 @@ const DashBoard = () => {
   }
 
   const handleBlock = async (doc) => {
-    console.log('Doc', doc)
-    return
     doc.user.block = !doc.user.block
     try {
       setLoading(true)

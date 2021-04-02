@@ -135,7 +135,7 @@ const validationSchema = Yup.object().shape({
     .label('IFSC Code'),
 })
 
-const AddDoctorDetails = () => {
+const AddDoctorDetails = ({ msg }) => {
   const { register, handleSubmit, errors, watch } = useForm({
     resolver: yupResolver(validationSchema),
   })
@@ -240,7 +240,11 @@ const AddDoctorDetails = () => {
       })
       console.log('Res', res)
       setLoading(false)
-      toast.success('Your data has been saved')
+      if (msg) {
+        toast.success(msg)
+      } else {
+        toast.success('Your data has been saved')
+      }
       window.location.href = '/'
     } catch (error) {
       setLoading(false)

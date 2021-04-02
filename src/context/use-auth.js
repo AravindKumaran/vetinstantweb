@@ -11,6 +11,7 @@ const initialState = {
   user: null,
   isAuthenticated: null,
   error: null,
+  msg: null,
 }
 
 function reducer(state, action) {
@@ -22,6 +23,13 @@ function reducer(state, action) {
       }
 
     case 'LOGIN_SUCCESS':
+      localStorage.setItem('token', action.payload)
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: false,
+        loading: false,
+      }
     case 'REGISTER_SUCCESS':
       localStorage.setItem('token', action.payload)
       return {
@@ -29,6 +37,7 @@ function reducer(state, action) {
         ...action.payload,
         isAuthenticated: false,
         loading: false,
+        msg: 'Registration successfull! Please wait for admin approval',
       }
     case 'USER_LOADED':
       return {
@@ -67,6 +76,7 @@ function reducer(state, action) {
         ...state,
         loading: false,
         error: null,
+        msg: null,
       }
 
     default:
@@ -150,7 +160,7 @@ export function AuthProvider({ children }) {
         type: 'REGISTER_SUCCESS',
         payload: res.data.token,
       })
-      loadUser()
+      // loadUser()
     } catch (err) {
       dispatch({
         type: 'REGISTER_FAIL',
@@ -171,6 +181,7 @@ export function AuthProvider({ children }) {
         isAuthenticated: state.isAuthenticated,
         user: state.user,
         error: state.error,
+        msg: state.msg,
         loading: state.loading,
         loginUser,
         registerUser,
