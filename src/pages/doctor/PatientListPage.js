@@ -12,6 +12,7 @@ import { FiChevronRight } from 'react-icons/fi'
 import Backdrop from 'components/shared/UI/Backdrop'
 import Modal from 'components/shared/UI/Modal'
 import { Link } from 'react-router-dom'
+import showNotifs from 'utils/showNotif'
 
 const PatientListPage = () => {
   const { user } = useAuth()
@@ -21,6 +22,10 @@ const PatientListPage = () => {
   const [currentPatient, setCurrentPatient] = useState()
   const [pet, setPet] = useState(null)
   const [petLoading, setPetLoading] = useState(false)
+
+  useEffect(() => {
+    showNotifs()
+  }, [])
 
   useEffect(() => {
     const getPatients = async () => {

@@ -15,6 +15,7 @@ import Modal from 'components/shared/UI/Modal'
 import LoadingSpinner from 'components/shared/UI/LoadingSpinner'
 import DatePicker from 'react-datepicker'
 import DateTimeInput from 'components/layouts/DateTimeInput'
+import showNotifs from 'utils/showNotif'
 
 dayjs.extend(isSameOrAfter)
 
@@ -29,6 +30,10 @@ const PendingCallPage = () => {
   const [petLoading, setPetLoading] = useState(false)
   const [startDate, setStartDate] = useState(new Date())
   const [startTime, setStartTime] = useState(new Date())
+
+  useEffect(() => {
+    showNotifs()
+  }, [])
 
   const getUserPendingCalls = async () => {
     setLoading(true)
