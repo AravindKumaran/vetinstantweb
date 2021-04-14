@@ -27,6 +27,8 @@ const PendingCallPage = () => {
   const [open, setOpen] = useState(false)
   const [openSch, setOpenSch] = useState(false)
   const [petLoading, setPetLoading] = useState(false)
+  const [currentProblem, setCurrentProblem] = useState(null)
+  const [previousProblem, setPreviousProblem] = useState(null)
   const [startDate, setStartDate] = useState(new Date())
   const [startTime, setStartTime] = useState(new Date())
 
@@ -155,6 +157,20 @@ const PendingCallPage = () => {
       })
       // console.log('PET', petRes)
       setPet(petRes.data.exPet)
+      if (petRes.data.exPet.problems?.length > 0) {
+        const allProb = petRes.data.exPet.problems.reverse()
+        const curProbIndex = allProb.findIndex(
+          (prob) => prob.docname === user.name
+        )
+        if (curProbIndex !== -1) {
+          const cur = allProb[curProbIndex]
+          setCurrentProblem(cur)
+          allProb.splice(curProbIndex, 1)
+          setPreviousProblem(allProb)
+        } else {
+          setPreviousProblem(allProb)
+        }
+      }
       setPetLoading(false)
     } catch (error) {
       toast.error('Something Went Wrong! Please try again later!')
@@ -264,9 +280,96 @@ const PendingCallPage = () => {
                   </div>
                 ))}
 
-              {pet?.problems?.length > 0 && <h5>Pet Problems: </h5>}
-              {pet?.problems?.length > 0 &&
-                pet.problems.map((pb, i) => (
+              {currentProblem && <h5>Current Pet Problem: </h5>}
+              {currentProblem && (
+                <div className='pet__problems py-10'>
+                  <h5>
+                    Problem: <span>{currentProblem.problem}</span>
+                  </h5>
+                  <h5>
+                    Doctor's Name: <span>{currentProblem.docname}</span>
+                  </h5>
+                  <h5>
+                    Time Period: <span>{currentProblem.time}</span>
+                  </h5>
+                  <h5>
+                    Appetite: <span>{currentProblem.Appetite}</span>
+                  </h5>
+                  <h5>
+                    Behaviour: <span>{currentProblem.Behaviour}</span>
+                  </h5>
+                  <h5>
+                    Eyes: <span>{currentProblem.Eyes}</span>
+                  </h5>
+                  <h5>
+                    Comment: <span>{currentProblem.comment}</span>
+                  </h5>
+                  <h5>
+                    Gait: <span>{currentProblem.Gait}</span>
+                  </h5>
+                  <h5>
+                    Mucous: <span>{currentProblem.Mucous}</span>
+                  </h5>
+
+                  {currentProblem.Ears?.length > 0 && <h5>Ears: </h5>}
+
+                  {currentProblem.Ears?.length > 0 &&
+                    currentProblem.Ears.map((er, i) => (
+                      <h3 key={`${i}-Ears`}> {er}</h3>
+                    ))}
+
+                  {currentProblem.Feces?.length > 0 && <h5>Faces: </h5>}
+
+                  {currentProblem.Feces?.length > 0 &&
+                    currentProblem.Feces.map((fc, i) => (
+                      <h3 key={`Feces ${i}`}> {fc}</h3>
+                    ))}
+                  {currentProblem.Urine?.length > 0 && <h5>Urines: </h5>}
+
+                  {currentProblem.Urine?.length > 0 &&
+                    currentProblem.Urine.map((ur, i) => (
+                      <h3 key={`Urines ${i}`}> {ur}</h3>
+                    ))}
+                  {currentProblem.Skin?.length > 0 && <h5>Skins: </h5>}
+
+                  {currentProblem.Skin?.length > 0 &&
+                    currentProblem.Skin.map((sk, i) => (
+                      <h3 key={`Skins ${i}`}> {sk}</h3>
+                    ))}
+
+                  {currentProblem?.images?.length && <h5>Pet Problem image</h5>}
+                  <div className='pet__history__images'>
+                    {currentProblem?.images?.length > 0 &&
+                      currentProblem.images.map((img, i) => (
+                        <div key={`${img}-${i}`} className='pet__history__img'>
+                          {/* <img
+                              src={`http://192.168.43.242:8000/${img}`}
+                              width='200'
+                              height='200'
+                              style={{ maxHeight: '200px', maxWidth: '200px' }}
+                              alt={`${pet.type}`}
+                            /> */}
+                          <img
+                            src={`${img}`}
+                            width='200'
+                            height='200'
+                            style={{
+                              maxHeight: '200px',
+                              maxWidth: '200px',
+                              objectFit: 'cover',
+                            }}
+                            alt={`${pet.type}`}
+                          />
+                        </div>
+                      ))}
+                  </div>
+                  <hr />
+                </div>
+              )}
+
+              {previousProblem?.length > 0 && <h5>Previous Pet Problems: </h5>}
+              {previousProblem?.length > 0 &&
+                previousProblem.map((pb, i) => (
                   <div className='pet__problems py-10' key={pb._id}>
                     <h5>
                       {i + 1}. Problem: <span>{pb.problem}</span>
