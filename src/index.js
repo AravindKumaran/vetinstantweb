@@ -5,8 +5,6 @@ import { AuthProvider } from './context/use-auth'
 import { BrowserRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
 
-import { registerServiceWorker } from './serviceWorker'
-
 import './index.css'
 
 ReactDOM.render(
@@ -20,5 +18,4 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-registerServiceWorker()
 reportWebVitals()

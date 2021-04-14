@@ -12,7 +12,6 @@ import Select from 'components/shared/Forms/Select'
 import Input from 'components/shared/Forms/Input'
 import Button from 'components/shared/Forms/Button'
 import client from 'services/client'
-import showNotifs from 'utils/showNotif'
 
 const validationSchema = Yup.object().shape({
   patientName: Yup.string()
@@ -41,10 +40,6 @@ const PrescriptionPage = () => {
   const { user } = useAuth()
   const [patients, setPatients] = useState([])
   const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    showNotifs()
-  }, [])
 
   useEffect(() => {
     const getPatients = async () => {

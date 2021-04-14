@@ -16,7 +16,6 @@ import DatePicker from 'react-datepicker'
 import DateTimeInput from 'components/layouts/DateTimeInput'
 import Button from 'components/shared/Forms/Button'
 import { Link } from 'react-router-dom'
-import showNotifs from 'utils/showNotif'
 
 const CallLogPage = () => {
   const { user } = useAuth()
@@ -27,10 +26,6 @@ const CallLogPage = () => {
   const [currentCall, setCurrentCall] = useState()
   const [startDate, setStartDate] = useState(new Date())
   const [startTime, setStartTime] = useState(new Date())
-
-  useEffect(() => {
-    showNotifs()
-  }, [])
 
   useEffect(() => {
     const getMissedCall = async () => {
