@@ -40,9 +40,30 @@ const PendingCallPage = () => {
           Authorization: `Bearer ${localStorage.token}`,
         },
       })
+      const expiredCalls = []
+      const allCalls = pres.data.calls.filter((call) => {
+        if (call?.deleteAfter) {
+          if (dayjs().isSameOrAfter(dayjs(call.deleteAfter))) {
+            expiredCalls.push(call)
+            return
+          } else {
+            return call
+          }
+        } else {
+          return call
+        }
+      })
 
-      //   console.log('Ress', pres.data)
-      setPendingCalls(pres.data.calls)
+      console.log('Expired', expiredCalls)
+
+      expiredCalls.forEach(async (call) => {
+        await client.delete(`/pendingcalls/after/${call._id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.token}`,
+          },
+        })
+      })
+      setPendingCalls(allCalls)
       setLoading(false)
     } catch (error) {
       setLoading(false)

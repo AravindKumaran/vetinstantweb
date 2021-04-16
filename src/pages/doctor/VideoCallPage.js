@@ -94,7 +94,7 @@ const VideoCallPage = () => {
   }, [user.name])
 
   const handleLogout = useCallback((event) => {
-    handleDeleteCall()
+    // handleDeleteCall()
     setToken(null)
     window.location.href = '/'
   }, [])
