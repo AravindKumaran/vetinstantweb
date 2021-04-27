@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Video from 'twilio-video'
 import Participant from './Participant'
 
-const Room = ({ roomName, token, handleLogout }) => {
+const Room = ({ roomName, token, handleLogout, handlePetDetails }) => {
   const [room, setRoom] = useState(null)
   const [participants, setParticipants] = useState([])
 
@@ -51,6 +51,14 @@ const Room = ({ roomName, token, handleLogout }) => {
     <div className='room'>
       <span className='btn' style={{ margin: '20px' }} onClick={handleLogout}>
         End Call
+      </span>
+      <span
+        className='btn'
+        style={{ margin: '20px' }}
+        onClick={handlePetDetails}
+        s
+      >
+        Pet Details
       </span>
       <div className='local-participant'>
         {room ? (

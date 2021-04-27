@@ -15,6 +15,7 @@
 .local-participant {
   text-align: center;
   margin-bottom: 2em;
+  margin-top: 5rem;
 }
 .remote-participants {
   display: flex;
